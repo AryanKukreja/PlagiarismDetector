@@ -15,18 +15,18 @@
  * Extra Info - This is only the tester program
  */
 
-import SimilarityChecker.NaiveImplementation;
+import SimilarityChecker.*;
 
 import java.util.ArrayList;
 
 public class TestProgram {
     public static void main(String[] args) {
-        NaiveImplementation work = new NaiveImplementation();
         String src = "abcdefcbghigjdabeft", pattern = "ab";
-        ArrayList<Integer> results = work.naiveComparison(src, pattern);
 
-        for (int element : results) {
-            System.out.println(src.substring(element, element + pattern.length()));
-        }
+        NaiveImplementation naive = new NaiveImplementation();
+        System.out.println(naive.naiveComparison(src, pattern));
+
+        RabinKarpAlgorithm rabinKarpTest = new RabinKarpAlgorithm();
+        System.out.println(rabinKarpTest.rabinKarpImplementation(src, pattern));
     }
 }
