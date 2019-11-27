@@ -19,7 +19,7 @@ package SimilarityChecker;
 import java.util.ArrayList;
 
 public class RabinKarpAlgorithm {
-    public ArrayList<Integer> rabinKarpImplementation (String source, String pattern) {
+    public ArrayList<Integer> rabinKarpComparison(String source, String pattern) {
         int patLen = pattern.length(), srcLen = source.length();
         ArrayList<Integer> finalList = new ArrayList<>();
 
