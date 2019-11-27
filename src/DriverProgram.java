@@ -33,8 +33,6 @@ class DriverProgram {
             plagiarized.append(temp);
         }
 
-        double result = WholeFileChecker.checkWholeFile(source.toString(), plagiarized.toString());
-        System.out.println(result);
-        return result;
+        return WholeFileChecker.checkWholeFile(source.toString(), plagiarized.toString());
     }
 }

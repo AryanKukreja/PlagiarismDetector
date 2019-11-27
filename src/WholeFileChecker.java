@@ -23,14 +23,10 @@ class WholeFileChecker {
 
         int totalPlagiarized = 0;
         int totalWords = copied.split("\\s+").length;
-        System.out.println(totalWords);
+
         for (String s : copiedArray) {
             totalPlagiarized += Jaccard.jaccardImplementation(origin, s);
         }
         return (double) totalPlagiarized / totalWords;
     }
-
-//    public static void main(String[] args) {
-//        WholeFileChecker.checkWholeFile("In object-oriented programming. inheritance is a way to form new classes using classes that have already been defined. The inheritance concept was invented in 1967 for Simula.", "Inheritance in object oriented programming. is a way to form new classes. using classes that have already been defined.");
-//    }
 }

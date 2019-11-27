@@ -22,12 +22,9 @@ import java.util.List;
 
 public class Jaccard {
     public static double jaccardImplementation(String wiki, String cheat) {
-        // Cheat is just one fucking sentence
-        // senlist is the entire damn original file
         List<String> cheatB = Arrays.asList(cheat.toLowerCase().replaceAll("[^a-z0-9 ]", "").split(" "));
         String[] senList = wiki.toLowerCase().replaceAll("[^a-z0-9. ]", "").replaceAll("\\. ", ".").split("\\.");
 
-        int cheatSize = cheatB.size();
         double max = 0, maximum = 0;
 
         List<String> copied, sentB;
@@ -43,7 +40,6 @@ public class Jaccard {
                 maximum = copied.size();
             }
         }
-
         return maximum;
     }
 }
