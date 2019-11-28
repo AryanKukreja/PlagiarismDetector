@@ -52,7 +52,13 @@ class WholeFileChecker {
             totalPlagiarized += useJaccard.jaccardImplementation(sentence);
         }
 
-        // Return their percentage of plagiarism.
-        return (double) totalPlagiarized / totalWords;
+        double plagiarizedValue = (double) totalPlagiarized / totalWords;
+
+        if (plagiarizedValue >= 1) {
+            // Return their percentage of plagiarism.
+            return 1;
+        } else {
+            return plagiarizedValue;
+        }
     }
 }

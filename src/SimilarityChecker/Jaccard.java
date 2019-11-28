@@ -60,6 +60,11 @@ public class Jaccard {
      * @return Return the number of words of copied that are plagiarized
      */
     public double jaccardImplementation(String plagiarized) {
+        if (originalSentence == null) {
+            System.out.println("Please define the original text to compare against.\n");
+            return Double.NaN;
+        }
+
         // Clean up the strings passed in as variables, and save them as a list
         // Split the plagiarized string into a bag of words
         // Split the original string into a bag of sentences.
