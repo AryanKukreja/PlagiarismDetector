@@ -1,4 +1,5 @@
-# Overview
+# Plagiarism-Detector Program
+## Overview
 The program is expected to take in 2 text files, and look for similarities between the 2 of them. The present goal of this project is to detect the degree of absolute matching between the 2 text files.
 
 # Setup and Installation
@@ -31,7 +32,7 @@ You can install this project by following these steps:
 git clone https://github.com/ABusyProgrammer/PlagiarismDetector
 ```
 3. Change directory into the project folder, and into `/src/`
-4. Run the following command (optionally you can provide your own original-textfiles directory and plagiarized-textfiles directory in full-address. Don't add any parameters if you just want to use test the program on the files in this repository itself):
+4. Run the following command (*optionally you can provide your own original-textfiles directory and plagiarized-textfiles directory in full-address. Don't add any parameters if you just want to use test the program on the files in this repository itself*):
 ```
 javac Test.java
 java Test.java [original_directory] [plagiarized_text_directory]
