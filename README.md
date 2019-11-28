@@ -1,6 +1,8 @@
 # Plagiarism-Detector Program
 The program is expected to take in 2 text files, and look for similarities between the 2 of them. The present goal of this project is to detect the degree of absolute matching between the 2 text files.
 
+Visit the [Wiki](https://github.com/ABusyProgrammer/PlagiarismDetector/wiki "Project Wiki") for more background on the project.
+
 # Setup and Installation
 To run this project on your computer, you will need the following installed:
 1. Java SE Development Kit
