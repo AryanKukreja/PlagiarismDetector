@@ -1,5 +1,4 @@
 # Plagiarism-Detector Program
-## Overview
 The program is expected to take in 2 text files, and look for similarities between the 2 of them. The present goal of this project is to detect the degree of absolute matching between the 2 text files.
 
 # Setup and Installation
