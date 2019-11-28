@@ -43,10 +43,13 @@ class WholeFileChecker {
         int totalPlagiarized = 0;
         int totalWords = copied.split("\\s+").length;
 
+        // Declare an instance of the Jaccard algorithm
+        Jaccard useJaccard = new Jaccard(origin);
+
         // For every string in the list of copied sentences
-        for (String s : copiedArray) {
+        for (String sentence : copiedArray) {
             // Sum up its plagiarized count.
-            totalPlagiarized += Jaccard.jaccardImplementation(origin, s);
+            totalPlagiarized += useJaccard.jaccardImplementation(sentence);
         }
 
         // Return their percentage of plagiarism.

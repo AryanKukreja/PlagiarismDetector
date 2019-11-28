@@ -27,21 +27,43 @@ import java.util.List;
  * Jaccard Class
  * - A container class for the core plagiarism
  */
+@SuppressWarnings({"unused"})
 public class Jaccard {
+    // Declare a field to store a bag of the original sentence (rather than constantly sending it in)
+    private String[] originalSentence;
+
+    /**
+     * Jaccard() Class Constructor
+     * - A class constructor used to create a class
+     *
+     * @param original The original text to compare against
+     */
+    public Jaccard(String original) {
+        this.originalSentence = original.toLowerCase().replaceAll("[^a-z0-9. ]", "").replaceAll("\\. ", ".").split("\\.");
+    }
+
+    /**
+     * changeOriginal() Class method
+     * - Used to update the original string field.
+     *
+     * @param newOriginal The new string to set as original
+     */
+    public void changeOriginal(String newOriginal) {
+        this.originalSentence = newOriginal.toLowerCase().replaceAll("[^a-z0-9. ]", "").replaceAll("\\. ", ".").split("\\.");
+    }
+
     /**
      * jaccardImplementation() static method:
      * - Holds the implementation of the Jaccard algorithm for comparing strings.
      *
-     * @param original    The original string passed in
      * @param plagiarized The plagiarized sentence
      * @return Return the number of words of copied that are plagiarized
      */
-    public static double jaccardImplementation(String original, String plagiarized) {
+    public double jaccardImplementation(String plagiarized) {
         // Clean up the strings passed in as variables, and save them as a list
         // Split the plagiarized string into a bag of words
         // Split the original string into a bag of sentences.
         List<String> plagiarizedBag = Arrays.asList(plagiarized.toLowerCase().replaceAll("[^a-z0-9 ]", "").split(" "));
-        String[] originalSentences = original.toLowerCase().replaceAll("[^a-z0-9. ]", "").replaceAll("\\. ", ".").split("\\.");
 
         // Declare tracker variables
         // Declare a list to store the copied and original sentence
@@ -49,7 +71,7 @@ public class Jaccard {
         List<String> copied, originalString;
 
         // For every sentence in te original sentences bag
-        for (String sentence : originalSentences) {
+        for (String sentence : this.originalSentence) {
             // Split that sentence into a bag of words
             // Make a copy of plagiarizedBag
             originalString = Arrays.asList(sentence.split(" "));
