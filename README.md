@@ -11,7 +11,17 @@ To check if your Java installation was successful, run the following command:
 ```
 java -version
 ```
-This should print out 
+This should print out the version number of the Java installation. Then run:
+```
+javac -version
+```
+This will output the version of the Java compiler if it is successfully installed.
+
+To check if Git is installed successfully:
+```
+git --version
+```
+This should output the git version installed.
 
 ## Installation
 You can install this project by following these steps:
@@ -20,4 +30,10 @@ You can install this project by following these steps:
 ```
 git clone https://github.com/ABusyProgrammer/PlagiarismDetector
 ```
-3. 
+3. Change directory into the project folder, and into `/src/`
+4. Run the following command (optionally you can provide your own original-textfiles directory and plagiarized-textfiles directory in full-address. Don't add any parameters if you just want to use test the program on the files in this repository itself):
+```
+javac Test.java
+java Test.java [original_directory] [plagiarized_text_directory]
+```
+5. Open the `output.csv` file after it is done running.
