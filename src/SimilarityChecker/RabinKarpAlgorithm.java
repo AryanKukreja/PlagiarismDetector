@@ -4,15 +4,15 @@
  * Course     - Design and Analysis of Algorithms | SOFE 3770
  *
  * Purpose:
- *      - Assignment # | Assignment Description
+ *      - Project | Plagiarism Detection
  *
  * About:
- *      -
+ *      - This is a Rabin-Karp implementation of string comparison.
  *
- * Input      - {List of Inputs}
- * Output     - {List of Outputs}
+ * Input      - A source string and a plagiarized string
+ * Output     - Starting points of common elements in the string
  *
- * Extra Info - {}
+ * Extra Info - This algorithm is not used in the main program; however, it may be of use for future developments on this project
  */
 package SimilarityChecker;
 
