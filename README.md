@@ -41,4 +41,4 @@ java Test [original_directory] [plagiarized_text_directory]
 5. Open the `output.csv` file after it is done running.
 
 *Note: if you are not running this program on IntelliJ IDEA, then you will have to change the following lines in the `Test.java` file:
-- Line 44, 45 & 56: Remove `src/` from the directory specification
+- Line 44, 45 & 56: Remove `src/` from the directory specification*
