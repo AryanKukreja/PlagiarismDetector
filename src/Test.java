@@ -41,8 +41,8 @@ public class Test {
         // If the user specifies the folder location then use that to create the File objects
         // Else use the default project folder.
         if (args.length != 2) {
-            originals = new File("src/Evaluation/Original");
-            duplicates = new File("src/Evaluation/Plagiarized");
+            originals = new File("Evaluation/Original");
+            duplicates = new File("Evaluation/Plagiarized");
         } else {
             originals = new File(args[0]);
             duplicates = new File(args[1]);
@@ -53,7 +53,7 @@ public class Test {
         File[] duplicateList = duplicates.listFiles();
 
         // Declare a variable to write to the output CSV file
-        PrintWriter output = new PrintWriter("src/Evaluation/output.csv");
+        PrintWriter output = new PrintWriter("Evaluation/output.csv");
 
         // Check that the duplicateList and originList is not undefined
         assert duplicateList != null;
