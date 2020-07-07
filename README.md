@@ -43,3 +43,5 @@ java Test [original_directory] [plagiarized_text_directory]
 ### Notes
 If you are using an IDE to run the program, then the directories specified under `Test.java` may have to be edited, since directories often read directories differently.
 * For IntelliJ, add `src/` in front of every directory specified in `Test.java`
+
+Most IDEs will guide you through the setup of the project; IntelliJ will automatically create a .idea workspace. You only have to follow through the Project cretion in your respective IDE.
