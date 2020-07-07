@@ -55,6 +55,9 @@ class DriverProgram {
             plagiarized.append(temp);
         }
 
+        srcRead.close();
+        plagRead.close();
+
         // Return the plagiarism level for the entire file system
         return WholeFileChecker.checkWholeFile(source.toString(), plagiarized.toString());
     }
