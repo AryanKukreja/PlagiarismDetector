@@ -1,4 +1,4 @@
-package com.abusyprogrammer.backend.hamming;
+package com.abusyprogrammer.backend.algorithms.hamming;
 
 public class HammingInput {
 
