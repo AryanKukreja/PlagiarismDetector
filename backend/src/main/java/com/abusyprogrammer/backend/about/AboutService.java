@@ -1,5 +1,6 @@
 package com.abusyprogrammer.backend.about;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "api/misc/")
 public class AboutService {
     
-    @RequestMapping("about/")
+    @GetMapping(path = "about/")
     public String about() {
         return 
         "{" + 
