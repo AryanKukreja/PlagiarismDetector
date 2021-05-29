@@ -1,6 +1,5 @@
-package com.abusyprogrammer.backend.about;
+package com.abusyprogrammer.backend.misc;
 
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,10 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
  * @since   2021-03-27
  */
 @RestController
-@RequestMapping(path = "api/misc/")
+@RequestMapping(path = "api/about")
 public class AboutService {
     
-    @GetMapping(path = "about/")
     public String about() {
         return 
         "{" + 

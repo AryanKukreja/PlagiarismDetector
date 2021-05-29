@@ -1,6 +1,6 @@
 package com.abusyprogrammer.backend.hamming;
 
-import com.abusyprogrammer.backend.generic.Input;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,8 +12,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class HammingController {
     
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public String compare(@RequestBody Input input) {
-        Hamming service = new Hamming(input.getText1(), input.getText2());
+    public String compare(@RequestBody HammingInput input) throws JsonProcessingException {
+        HammingService service = new HammingService(input.getText1(), input.getText2());
+
+        if (input.getOffset() == 0) {
+            service.fullStringCheck();
+        }
+        else {
+            service.fullStringCheck(input.getOffset());
+        }
+
+        return service.jsonify();
     }
 
 }
