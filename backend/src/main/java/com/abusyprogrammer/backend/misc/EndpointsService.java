@@ -2,7 +2,7 @@ package com.abusyprogrammer.backend.misc;
 
 import java.util.HashMap;
 
-import org.json.JSONObject;
+import org.json.simple.JSONObject;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,7 +20,7 @@ public class EndpointsService {
     @GetMapping(path = "api/misc/endpoints/")
     public String getEndpoints() {
         JSONObject res = new JSONObject(this.endpoints);
-        return res.toString(2);
+        return res.toString();
     }
 
 }
