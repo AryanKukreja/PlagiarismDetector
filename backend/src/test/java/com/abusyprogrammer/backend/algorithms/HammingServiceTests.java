@@ -1,6 +1,7 @@
 package com.abusyprogrammer.backend.algorithms;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.abusyprogrammer.backend.algorithms.hamming.HammingController;
@@ -26,70 +27,77 @@ public class HammingServiceTests {
 	@Autowired
 	private MockMvc mvc;
 
+	private final String SHORT_TEXT = "I am taking a walk";
+	private final String LONG_TEXT = "I am going to take a stroll in the park";
+
 	@Test
 	public void testHammingInput() throws Exception {
-		HammingInput input = new HammingInput();
-		assertEquals("", input.getText1());
-		assertEquals("", input.getText2());
+		HammingInput input = new HammingInput(SHORT_TEXT, LONG_TEXT);
+		assertEquals(SHORT_TEXT, input.getText1());
+		assertEquals(LONG_TEXT, input.getText2());
 		assertEquals(0, input.getOffset());
 
-		input = new HammingInput("I am eating an apple", "I am devouring an apple");
-		assertEquals("I am eating an apple", input.getText1());
-		assertEquals("I am devouring an apple", input.getText2());
-		assertEquals(0, input.getOffset());
-
-		input = new HammingInput("I am eating an apple", "I am devouring an apple", 5);
-		assertEquals("I am eating an apple", input.getText1());
-		assertEquals("I am devouring an apple", input.getText2());
+		input = new HammingInput(SHORT_TEXT, LONG_TEXT, 5);
+		assertEquals(SHORT_TEXT, input.getText1());
+		assertEquals(LONG_TEXT, input.getText2());
 		assertEquals(5, input.getOffset());
 	}
 
 	@Test
 	public void testHammingService() throws Exception {
-		HammingService service = new HammingService();
-		assertEquals("", service.getLonger());
-		assertEquals("", service.getShorter());
-		assertEquals(0.0, service.getScore());
-		assertEquals(0, service.getMatches());
-		assertEquals(-1, service.fullStringCheck());
-		assertEquals(-1, service.fullStringCheck(3));
-		assertEquals("Error: No strings provided to compare", service.jsonify());
-
-		service = new HammingService("I am going to take a stroll in the park", "I am taking a walk");
-		assertEquals("I am going to take a stroll in the park", service.getLonger());
-		assertEquals("I am taking a walk", service.getShorter());
+		HammingService service = new HammingService(LONG_TEXT, SHORT_TEXT);
+		assertEquals(LONG_TEXT, service.getLonger());
+		assertEquals(SHORT_TEXT, service.getShorter());
 		assertEquals(0.0, service.getScore());
 		assertEquals(0, service.getMatches());
 		assertEquals(0, service.fullStringCheck());
-		assertEquals(0, service.fullStringCheck(3));
-		assertEquals(-2, service.fullStringCheck(100));
+		assertEquals(0, service.fullStringCheck(SHORT_TEXT.length() - 1));
+		assertEquals(-2, service.fullStringCheck(LONG_TEXT.length() - SHORT_TEXT.length()));
 
-		service = new HammingService("I am taking a walk", "I am going to take a stroll in the park");
-		assertEquals("I am going to take a stroll in the park", service.getLonger());
-		assertEquals("I am taking a walk", service.getShorter());
-		assertEquals(0, service.fullStringCheck(3));
-		assertEquals(
-				"{\"longer\":\"I am going to take a stroll in the park\",\"shorter\":\"I am taking a walk\",\"score\":0.05128205128205128,\"matches\":2}",
-				service.jsonify());
+		service = new HammingService(SHORT_TEXT, LONG_TEXT);
+		assertEquals(LONG_TEXT, service.getLonger());
+		assertEquals(SHORT_TEXT, service.getShorter());
+		assertEquals(0, service.fullStringCheck(SHORT_TEXT.length() - 1));
 	}
 
 	@Test
 	public void testHammingController() throws Exception {
 		mvc.perform(MockMvcRequestBuilders.post("/api/hamming/")
-				.content(asJsonString(new HammingInput("I am taking a walk", "I am going to take a stroll in the park", 3)))
-				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.longer").value("I am going to take a stroll in the park"))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.shorter").value("I am taking a walk"))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.score").value(0.05128205128205128))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.matches").value(2));
+				.content(asJsonString(new HammingInput(SHORT_TEXT, LONG_TEXT, SHORT_TEXT.length() - 1)))
+				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk())
+				.andExpect(MockMvcResultMatchers.jsonPath("$.longer").value(LONG_TEXT))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.shorter").value(SHORT_TEXT))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.score").value(0.10256410256410256))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.matches").value(4));
 
 		mvc.perform(MockMvcRequestBuilders.post("/api/hamming/")
-				.content(asJsonString(new HammingInput("I am taking a walk", "I am going to take a stroll in the park")))
-				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.longer").value("I am going to take a stroll in the park"))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.shorter").value("I am taking a walk"))
+				.content(asJsonString(new HammingInput(SHORT_TEXT, LONG_TEXT)))
+				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk())
+				.andExpect(MockMvcResultMatchers.jsonPath("$.longer").value(LONG_TEXT))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.shorter").value(SHORT_TEXT))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.score").value(0.1794871794871795))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.matches").value(7));
+
+		mvc.perform(MockMvcRequestBuilders.post("/api/hamming/")
+				.content(asJsonString(new HammingInput("", LONG_TEXT)))
+				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk())
+				.andExpect(MockMvcResultMatchers.jsonPath("$.error").value("Cannot run processing with blank strings."));
+
+		mvc.perform(MockMvcRequestBuilders.post("/api/hamming/")
+				.content(asJsonString(new HammingInput(SHORT_TEXT, LONG_TEXT, LONG_TEXT.length() - SHORT_TEXT.length())))
+				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk())
+				.andExpect(MockMvcResultMatchers.jsonPath("$.error").value("The offset cannot be larger than the texts passed in."));
+
+		mvc.perform(MockMvcRequestBuilders.post("/api/hamming/")
+				.content(asJsonString(new HammingInput(SHORT_TEXT, "", SHORT_TEXT.length())))
+				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
+				.andDo(print())
+				.andExpect(status().isOk())
+				.andExpect(MockMvcResultMatchers.jsonPath("$.error").value("Cannot run processing with blank strings."));
 	}
 
 	public static String asJsonString(final Object obj) {

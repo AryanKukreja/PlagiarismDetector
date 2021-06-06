@@ -3,8 +3,8 @@ package com.abusyprogrammer.backend;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.abusyprogrammer.backend.misc.AboutService;
-import com.abusyprogrammer.backend.misc.EndpointsService;
+import com.abusyprogrammer.backend.misc.AboutController;
+import com.abusyprogrammer.backend.misc.EndpointsController;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,7 +25,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
  * @since 2021-06-04
  */
 @RunWith(SpringRunner.class)
-@WebMvcTest({AboutService.class, EndpointsService.class})
+@WebMvcTest({AboutController.class, EndpointsController.class})
 public class MiscServiceTests {
 
 	// Mock MVC variable set up

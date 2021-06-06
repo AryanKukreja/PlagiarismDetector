@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2021-03-27
  */
 @RestController
-public class AboutService {
+public class AboutController {
 
     /**
      * The about() method returns information about the application
