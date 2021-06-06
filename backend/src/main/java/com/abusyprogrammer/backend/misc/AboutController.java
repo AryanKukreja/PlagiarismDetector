@@ -7,9 +7,7 @@ import java.io.IOException;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -21,11 +19,17 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2021-03-27
  */
 @RestController
-public class AboutService {
+public class AboutController {
 
-    final Logger LOGGER = LoggerFactory.getLogger(getClass());
-
-    @RequestMapping(path = "api/misc/about/")
+    /**
+     * The about() method returns information about the application
+     * 
+     * @return Application Information
+     * @throws IOException
+     * @throws FileNotFoundException
+     * @throws ParseException
+     */
+    @GetMapping(path = "api/misc/about/")
     public String about() throws IOException, FileNotFoundException, ParseException {
         JSONParser jsonParser = new JSONParser();         
         FileReader reader = new FileReader("src/main/resources/system.properties.json");
