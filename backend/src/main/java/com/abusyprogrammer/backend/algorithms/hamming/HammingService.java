@@ -34,7 +34,7 @@ public class HammingService {
     }
 
     public int fullStringCheck() {
-        if (this.longer == null || this.shorter == null) {
+        if (this.longer == "" || this.shorter == "") {
             return -1;
         }
 
@@ -52,7 +52,7 @@ public class HammingService {
     }
 
     public int fullStringCheck(int offset) {
-        if (this.longer == null || this.shorter == null) {
+        if (this.longer == "" || this.shorter == "") {
             return -1;
         }
 
@@ -61,7 +61,7 @@ public class HammingService {
 
         int matches = 0;
         for (int iterator = offset; iterator < this.shorter.length() + offset; iterator++) {
-            if (this.longer.charAt(iterator) == this.shorter.charAt(iterator)) {
+            if (this.longer.charAt(iterator) == this.shorter.charAt(iterator - offset)) {
                 matches++;
             }
         }
@@ -72,7 +72,27 @@ public class HammingService {
         return 0;
     }
 
+    public String getLonger() {
+        return longer;
+    }
+
+    public String getShorter() {
+        return shorter;
+    }
+
+    public double getScore() {
+        return score;
+    }
+
+    public int getMatches() {
+        return matches;
+    }
+
     public String jsonify() throws JsonProcessingException {
+        if (this.longer == "" && this.shorter == "") {
+            return "Error: No strings provided to compare";
+        }
+        
         ObjectMapper mapper = new ObjectMapper();
         return mapper.writeValueAsString(this);
     }
