@@ -1,7 +1,0 @@
-{
-	"name": "Spring-Boot Backend for String-Matching Algorithms Application",
-	"about": "A RESTful web-application with implementations of various string matching algorithms and exposes them as endpoints.",
-	"language": "Java 11",
-	"framework": "Spring Boot",
-	"version": 2
-}
