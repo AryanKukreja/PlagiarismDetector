@@ -6,8 +6,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * HammingService class has the Hamming algorithm implementations for
- * the controller to work with
+ * HammingService class has the Hamming algorithm implementations for the
+ * controller to work with
  * 
  * @author Aryan Kukreja
  * @version 1.0.0
@@ -22,8 +22,8 @@ public class HammingService {
     int matches;
 
     /**
-     * This constructor is used for initializing the input with the 2
-     * strings to compare. The scores and matches are set to 0 by default
+     * This constructor is used for initializing the input with the 2 strings to
+     * compare. The scores and matches are set to 0 by default
      * 
      * @param text1 String #1 to compare
      * @param text2 String #2 to compare
@@ -32,8 +32,7 @@ public class HammingService {
         if (text1.length() > text2.length()) {
             this.longer = text1;
             this.shorter = text2;
-        }
-        else {
+        } else {
             this.longer = text2;
             this.shorter = text1;
         }
@@ -43,8 +42,8 @@ public class HammingService {
     }
 
     /**
-     * This fullStringCheck() checks for similarity between the 2 strings
-     * without any offset specified
+     * This fullStringCheck() checks for similarity between the 2 strings without
+     * any offset specified
      * 
      * @return Success state of algorithm execution
      */
@@ -68,8 +67,8 @@ public class HammingService {
     }
 
     /**
-     * This fullStringCheck() checks for similarity between the 2 strings
-     * with a specific offset
+     * This fullStringCheck() checks for similarity between the 2 strings with a
+     * specific offset
      * 
      * @param offset The offset to use with the algorithm
      * @return Success state of algorithm execution
@@ -98,24 +97,6 @@ public class HammingService {
     }
 
     /**
-     * Getter for the shorter of 2 texts
-     * 
-     * @return Get the longer of the 2 texts
-     */
-    public String getLonger() {
-        return longer;
-    }
-
-    /**
-     * Getter for the similarity score between the 2 texts
-     * 
-     * @return Get the shorter of the 2 texts
-     */
-    public String getShorter() {
-        return shorter;
-    }
-
-    /**
      * Getter for the longer of 2 texts
      * 
      * @return Get the score of similarity of the 2 texts
@@ -139,9 +120,8 @@ public class HammingService {
      * @return A JSON string of the results of execution
      * @throws JsonProcessingException
      */
-    public String jsonify() throws JsonProcessingException {        
+    public String jsonify() throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.writeValueAsString(this);
     }
-
 }

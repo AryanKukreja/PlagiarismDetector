@@ -46,8 +46,6 @@ public class HammingServiceTests {
 	@Test
 	public void testHammingService() throws Exception {
 		HammingService service = new HammingService(LONG_TEXT, SHORT_TEXT);
-		assertEquals(LONG_TEXT, service.getLonger());
-		assertEquals(SHORT_TEXT, service.getShorter());
 		assertEquals(0.0, service.getScore());
 		assertEquals(0, service.getMatches());
 		assertEquals(0, service.fullStringCheck());
@@ -55,8 +53,6 @@ public class HammingServiceTests {
 		assertEquals(-2, service.fullStringCheck(LONG_TEXT.length() - SHORT_TEXT.length()));
 
 		service = new HammingService(SHORT_TEXT, LONG_TEXT);
-		assertEquals(LONG_TEXT, service.getLonger());
-		assertEquals(SHORT_TEXT, service.getShorter());
 		assertEquals(0, service.fullStringCheck(SHORT_TEXT.length() - 1));
 	}
 
@@ -64,38 +60,33 @@ public class HammingServiceTests {
 	public void testHammingController() throws Exception {
 		mvc.perform(MockMvcRequestBuilders.post("/api/hamming/")
 				.content(asJsonString(new HammingInput(SHORT_TEXT, LONG_TEXT, SHORT_TEXT.length() - 1)))
-				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
-				.andExpect(status().isOk())
+				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.longer").value(LONG_TEXT))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.shorter").value(SHORT_TEXT))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.score").value(0.10256410256410256))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.matches").value(4));
 
-		mvc.perform(MockMvcRequestBuilders.post("/api/hamming/")
-				.content(asJsonString(new HammingInput(SHORT_TEXT, LONG_TEXT)))
-				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
-				.andExpect(status().isOk())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.longer").value(LONG_TEXT))
+		mvc.perform(
+				MockMvcRequestBuilders.post("/api/hamming/").content(asJsonString(new HammingInput(SHORT_TEXT, LONG_TEXT)))
+						.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk()).andExpect(MockMvcResultMatchers.jsonPath("$.longer").value(LONG_TEXT))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.shorter").value(SHORT_TEXT))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.score").value(0.1794871794871795))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.matches").value(7));
 
-		mvc.perform(MockMvcRequestBuilders.post("/api/hamming/")
-				.content(asJsonString(new HammingInput("", LONG_TEXT)))
-				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
-				.andExpect(status().isOk())
+		mvc.perform(MockMvcRequestBuilders.post("/api/hamming/").content(asJsonString(new HammingInput("", LONG_TEXT)))
+				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.error").value("Cannot run processing with blank strings."));
 
 		mvc.perform(MockMvcRequestBuilders.post("/api/hamming/")
 				.content(asJsonString(new HammingInput(SHORT_TEXT, LONG_TEXT, LONG_TEXT.length() - SHORT_TEXT.length())))
-				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
-				.andExpect(status().isOk())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.error").value("The offset cannot be larger than the texts passed in."));
+				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+				.andExpect(
+						MockMvcResultMatchers.jsonPath("$.error").value("The offset cannot be larger than the texts passed in."));
 
 		mvc.perform(MockMvcRequestBuilders.post("/api/hamming/")
 				.content(asJsonString(new HammingInput(SHORT_TEXT, "", SHORT_TEXT.length())))
-				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
-				.andDo(print())
+				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)).andDo(print())
 				.andExpect(status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.error").value("Cannot run processing with blank strings."));
 	}

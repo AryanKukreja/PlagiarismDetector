@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * The HammingController class accepts requests to the /api/hamming
- * endpoint and forwards processing to HammingService
+ * The HammingController class accepts requests to the api/hamming/ endpoint and
+ * forwards processing to HammingService
  * 
  * @author Aryan Kukreja
  * @version 1.0.0
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path = "api/hamming/")
 public class HammingController {
-    
+
     /**
      * The compare() function is linked with the /api/hamming endpoint and processes
      * all string similarity checking requests.
@@ -34,15 +34,13 @@ public class HammingController {
         int result;
         if (input.getOffset() == 0) {
             result = service.fullStringCheck();
-        }
-        else {
+        } else {
             result = service.fullStringCheck(input.getOffset());
         }
 
         if (result == -1) {
             return "{\"error\": \"Cannot run processing with blank strings.\"}";
-        }
-        else if (result == -2) {
+        } else if (result == -2) {
             return "{\"error\": \"The offset cannot be larger than the texts passed in.\"}";
         }
 
