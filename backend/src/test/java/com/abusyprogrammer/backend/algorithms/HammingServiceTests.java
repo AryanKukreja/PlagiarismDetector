@@ -46,6 +46,8 @@ public class HammingServiceTests {
 	@Test
 	public void testHammingService() throws Exception {
 		HammingService service = new HammingService(LONG_TEXT, SHORT_TEXT);
+		assertEquals(LONG_TEXT, service.getLonger());
+		assertEquals(SHORT_TEXT, service.getShorter());
 		assertEquals(0.0, service.getScore());
 		assertEquals(0, service.getMatches());
 		assertEquals(0, service.fullStringCheck());
@@ -53,6 +55,8 @@ public class HammingServiceTests {
 		assertEquals(-2, service.fullStringCheck(LONG_TEXT.length() - SHORT_TEXT.length()));
 
 		service = new HammingService(SHORT_TEXT, LONG_TEXT);
+		assertEquals(LONG_TEXT, service.getLonger());
+		assertEquals(SHORT_TEXT, service.getShorter());
 		assertEquals(0, service.fullStringCheck(SHORT_TEXT.length() - 1));
 	}
 

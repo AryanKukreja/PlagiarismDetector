@@ -1,8 +1,8 @@
 package com.abusyprogrammer.backend.algorithms.hamming;
 
 /**
- * The HammingInput class is used to structure the body of incoming
- * requests to the HammingController.
+ * The HammingInput class is used to structure the body of incoming requests to
+ * the HammingController.
  * 
  * @author Aryan Kukreja
  * @version 1.0.0
@@ -10,7 +10,8 @@ package com.abusyprogrammer.backend.algorithms.hamming;
  */
 public class HammingInput {
 
-    // The 2 text strings to compare, along with an optional offset for the shorter string
+    // The 2 text strings to compare, along with an optional offset for the shorter
+    // string
     private String text1, text2;
     private int offset;
 
@@ -24,8 +25,8 @@ public class HammingInput {
     }
 
     /**
-     * This constructor is used for initializing the input with the 2
-     * strings to compare, but without any offset.
+     * This constructor is used for initializing the input with the 2 strings to
+     * compare, but without any offset.
      * 
      * @param text1 String #1 to compare
      * @param text2 String #2 to compare
@@ -37,11 +38,11 @@ public class HammingInput {
     }
 
     /**
-     * This constructor is used for initializing the input with the 2
-     * strings to compare and an offset.
+     * This constructor is used for initializing the input with the 2 strings to
+     * compare and an offset.
      * 
-     * @param text1 String #1 to compare
-     * @param text2 String #2 to compare
+     * @param text1  String #1 to compare
+     * @param text2  String #2 to compare
      * @param offset Offset to use for shorter string
      */
     public HammingInput(String text1, String text2, int offset) {

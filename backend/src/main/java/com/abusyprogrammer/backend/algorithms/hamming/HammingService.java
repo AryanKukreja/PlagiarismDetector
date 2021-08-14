@@ -97,6 +97,24 @@ public class HammingService {
     }
 
     /**
+     * Getter for the shorter of 2 texts
+     * 
+     * @return Get the longer of the 2 texts
+     */
+    public String getLonger() {
+        return longer;
+    }
+
+    /**
+     * Getter for the similarity score between the 2 texts
+     * 
+     * @return Get the shorter of the 2 texts
+     */
+    public String getShorter() {
+        return shorter;
+    }
+
+    /**
      * Getter for the longer of 2 texts
      * 
      * @return Get the score of similarity of the 2 texts
@@ -124,4 +142,5 @@ public class HammingService {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.writeValueAsString(this);
     }
+
 }

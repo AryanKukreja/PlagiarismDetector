@@ -1,10 +1,19 @@
 package com.abusyprogrammer.backend.algorithms.levenshtein;
 
+// Imports
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+ * LevenshteinService class has the Levenshtein algorithm implementations for
+ * the controller to work with
+ * 
+ * @author Aryan Kukreja
+ * @version 1.0.0
+ * @since 2021-08-13
+ */
 @JsonAutoDetect(fieldVisibility = Visibility.NON_PRIVATE)
 public class LevenshteinService {
 	// The 2 text strings to compare
@@ -12,6 +21,12 @@ public class LevenshteinService {
 	double score;
 	int differences;
 
+	/**
+	 * This constructor is used for initializing the input with the 2 strings to
+	 * 
+	 * @param text1 String #1 to compare
+	 * @param text2 String #2 to compare
+	 */
 	public LevenshteinService(String text1, String text2) {
 		this.text1 = text1;
 		this.text2 = text2;
@@ -19,6 +34,12 @@ public class LevenshteinService {
 		this.score = 0.0;
 	}
 
+	/**
+	 * Gets the minimum value in an array
+	 * 
+	 * @param array The array to search
+	 * @return The minimum value
+	 */
 	private int getMin(int[] array) {
 		int min = 0;
 		for (int i = 1; i < array.length; i++) {
@@ -30,7 +51,12 @@ public class LevenshteinService {
 		return array[min];
 	}
 
-	public int recursiveComputation() {
+	/**
+	 * The main computation function where the algorithm is implemented.
+	 * 
+	 * @return Status of function completion (success or failure)
+	 */
+	public int computation() {
 		int[][] distance = new int[this.text1.length() + 1][this.text2.length() + 1];
 		for (int i = 0; i <= this.text1.length(); i++) {
 			distance[i][0] = i;
@@ -55,19 +81,17 @@ public class LevenshteinService {
 			}
 		}
 
-		return distance[this.text1.length()][this.text2.length()];
-	}
-
-	public int computation(int text1End, int text2End) {
-		if (this.text1.equals("") || this.text2.equals("")) {
-			return -1;
-		}
-
-		this.differences = this.recursiveComputation();
+		this.differences = distance[this.text1.length()][this.text2.length()];
 
 		return 0;
 	}
 
+	/**
+	 * Returns a jsonified version of the object, to be returned to the user.
+	 * 
+	 * @return The data in JSON format
+	 * @throws JsonProcessingException If the JSON could not be formed
+	 */
 	public String jsonify() throws JsonProcessingException {
 		ObjectMapper mapper = new ObjectMapper();
 		return mapper.writeValueAsString(this);

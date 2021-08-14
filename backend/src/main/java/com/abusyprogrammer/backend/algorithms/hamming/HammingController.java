@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * The HammingController class accepts requests to the api/hamming/ endpoint and
+ * The HammingController class accepts requests to the /api/hamming endpoint and
  * forwards processing to HammingService
  * 
  * @author Aryan Kukreja
