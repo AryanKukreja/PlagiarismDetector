@@ -57,6 +57,10 @@ public class LevenshteinService {
 	 * @return Status of function completion (success or failure)
 	 */
 	public int computation() {
+		if (this.text1.equals("") || this.text2.equals("")) {
+			return -1;
+		}
+		
 		int[][] distance = new int[this.text1.length() + 1][this.text2.length() + 1];
 		for (int i = 0; i <= this.text1.length(); i++) {
 			distance[i][0] = i;
@@ -82,6 +86,7 @@ public class LevenshteinService {
 		}
 
 		this.differences = distance[this.text1.length()][this.text2.length()];
+		this.score = (double) this.differences / (double) Math.max(this.text1.length(), this.text2.length());
 
 		return 0;
 	}
@@ -95,5 +100,35 @@ public class LevenshteinService {
 	public String jsonify() throws JsonProcessingException {
 		ObjectMapper mapper = new ObjectMapper();
 		return mapper.writeValueAsString(this);
+	}
+
+	public int getDifferences() {
+		return this.differences;
+	}
+
+	/**
+	 * Calculates the similarity score
+	 * @return
+	 */
+	public double getScore() {
+		return this.score;
+	}
+
+	    /**
+     * The getter for text1.
+     * 
+     * @return text1
+     */
+    public String getText1() {
+			return this.text1;
+	}
+
+	/**
+	 * The getter for text2.
+	 * 
+	 * @return text2
+	 */
+	public String getText2() {
+			return this.text2;
 	}
 }

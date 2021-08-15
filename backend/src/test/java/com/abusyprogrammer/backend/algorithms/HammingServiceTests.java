@@ -67,7 +67,7 @@ public class HammingServiceTests {
 				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.longer").value(LONG_TEXT))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.shorter").value(SHORT_TEXT))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.score").value(0.10256410256410256))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.score").value((double) 4 / (double) 39))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.matches").value(4));
 
 		mvc.perform(
@@ -75,7 +75,7 @@ public class HammingServiceTests {
 						.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk()).andExpect(MockMvcResultMatchers.jsonPath("$.longer").value(LONG_TEXT))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.shorter").value(SHORT_TEXT))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.score").value(0.1794871794871795))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.score").value((double) 7 / (double) 39))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.matches").value(7));
 
 		mvc.perform(MockMvcRequestBuilders.post("/api/hamming/").content(asJsonString(new HammingInput("", LONG_TEXT)))
@@ -90,6 +90,26 @@ public class HammingServiceTests {
 
 		mvc.perform(MockMvcRequestBuilders.post("/api/hamming/")
 				.content(asJsonString(new HammingInput(SHORT_TEXT, "", SHORT_TEXT.length())))
+				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)).andDo(print())
+				.andExpect(status().isOk())
+				.andExpect(MockMvcResultMatchers.jsonPath("$.error").value("Cannot run processing with blank strings."));
+
+		// Invalid offset (passed in for testing)
+		mvc.perform(MockMvcRequestBuilders.post("/api/hamming/")
+				.content(asJsonString(new HammingInput("", "", 10)))
+				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)).andDo(print())
+				.andExpect(status().isOk())
+				.andExpect(MockMvcResultMatchers.jsonPath("$.error").value("Cannot run processing with blank strings."));
+
+		// Valid offset (passed in for testing)
+		mvc.perform(MockMvcRequestBuilders.post("/api/hamming/")
+				.content(asJsonString(new HammingInput("", "", 10)))
+				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)).andDo(print())
+				.andExpect(status().isOk())
+				.andExpect(MockMvcResultMatchers.jsonPath("$.error").value("Cannot run processing with blank strings."));
+
+		mvc.perform(MockMvcRequestBuilders.post("/api/hamming/")
+				.content(asJsonString(new HammingInput("", "")))
 				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)).andDo(print())
 				.andExpect(status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.error").value("Cannot run processing with blank strings."));

@@ -49,7 +49,7 @@ public class HammingService {
      */
     public int fullStringCheck() {
         // Check for a blank string
-        if (this.longer == "" || this.shorter == "") {
+        if (this.longer.equals("") || this.shorter.equals("")) {
             return -1;
         }
 
@@ -75,7 +75,7 @@ public class HammingService {
      */
     public int fullStringCheck(int offset) {
         // Check for blank strings
-        if (this.longer == "" || this.shorter == "") {
+        if (this.longer.equals("")  || this.shorter.equals("")) {
             return -1;
         }
 
