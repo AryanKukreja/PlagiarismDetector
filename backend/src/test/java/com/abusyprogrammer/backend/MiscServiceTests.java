@@ -17,15 +17,15 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 /**
- * A class for implementing unit tests for the services part of the 
- * Misc package using the Mock MVC
+ * A class for implementing unit tests for the services part of the Misc package
+ * using the Mock MVC
  * 
  * @author Aryan Kukreja
  * @version 1.0
  * @since 2021-06-04
  */
 @RunWith(SpringRunner.class)
-@WebMvcTest({AboutController.class, EndpointsController.class})
+@WebMvcTest({ AboutController.class, EndpointsController.class })
 public class MiscServiceTests {
 
 	// Mock MVC variable set up
@@ -39,23 +39,21 @@ public class MiscServiceTests {
 	 */
 	@Test
 	public void testAboutService() throws Exception {
-		mvc.perform( MockMvcRequestBuilders
-		.get("/api/misc/about/", 1)
-		.accept(MediaType.APPLICATION_JSON))
-		.andDo(print())
-		.andExpect(status().isOk());
+		mvc.perform(MockMvcRequestBuilders.get("/api/misc/about/", 1).accept(MediaType.APPLICATION_JSON)).andDo(print())
+				.andExpect(status().isOk());
 	}
 
 	@Test
 	public void testEndpointsService() throws Exception {
-		mvc.perform( MockMvcRequestBuilders
-		.get("/api/misc/endpoints/", 1)
-		.accept(MediaType.APPLICATION_JSON))
-		.andDo(print())
-		.andExpect(status().isOk())
-		.andExpect(MockMvcResultMatchers.jsonPath("$.endpoints").exists())
-		.andExpect(MockMvcResultMatchers.jsonPath("$.endpoints[0].name").value("Hamming Distance"))
-		.andExpect(MockMvcResultMatchers.jsonPath("$.endpoints[0].path").value("api/hamming/"));
+		mvc.perform(MockMvcRequestBuilders.get("/api/misc/endpoints/", 1).accept(MediaType.APPLICATION_JSON)).andDo(print())
+				.andExpect(status().isOk()).andExpect(MockMvcResultMatchers.jsonPath("$.Hamming").exists())
+				.andExpect(MockMvcResultMatchers.jsonPath("$.Hamming.name").value("Hamming Distance"))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.Hamming.path").value("api/hamming/"));
+
+		mvc.perform(MockMvcRequestBuilders.get("/api/misc/endpoints/", 1).accept(MediaType.APPLICATION_JSON)).andDo(print())
+				.andExpect(status().isOk()).andExpect(MockMvcResultMatchers.jsonPath("$.Levenshtein").exists())
+				.andExpect(MockMvcResultMatchers.jsonPath("$.Levenshtein.name").value("Levenshtein Distance"))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.Levenshtein.path").value("api/levenshtein/"));
 	}
 
 }
