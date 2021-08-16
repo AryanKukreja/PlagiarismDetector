@@ -1,4 +1,4 @@
-package com.abusyprogrammer.backend.algorithms.hamming;
+package com.abusyprogrammer.backend.algorithms.Hamming;
 
 /**
  * The HammingInput class is used to structure the body of incoming requests to

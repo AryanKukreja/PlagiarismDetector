@@ -1,14 +1,14 @@
-package com.abusyprogrammer.backend.algorithms.levenshtein;
+package com.abusyprogrammer.backend.algorithms.Jaccard;
 
 /**
- * The LevenshteinInput class is used to structure the body of incoming requests
- * to the LevenshteinController.
+ * The JaccardInput class is used to structure the body of incoming requests
+ * to the JaccardController.
  * 
- * @author Aryan Kukreja
- * @version 1.0.0
- * @since 2021-08-13
+ * @author ______________
+ * @version ______________
+ * @since ______________
  */
-public class LevenshteinInput {
+public class JaccardInput {
 
 	// The 2 string texts to be compared
 	private String text1, text2;
@@ -19,7 +19,7 @@ public class LevenshteinInput {
 	 * @param text1 String #1 to compare
 	 * @param text2 String #2 to compare
 	 */
-	public LevenshteinInput(String text1, String text2) {
+	public JaccardInput(String text1, String text2) {
 		this.text1 = text1;
 		this.text2 = text2;
 	}

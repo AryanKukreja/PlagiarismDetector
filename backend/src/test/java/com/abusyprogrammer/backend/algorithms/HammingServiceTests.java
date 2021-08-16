@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.abusyprogrammer.backend.algorithms.hamming.HammingController;
-import com.abusyprogrammer.backend.algorithms.hamming.HammingInput;
-import com.abusyprogrammer.backend.algorithms.hamming.HammingService;
+import com.abusyprogrammer.backend.algorithms.Hamming.HammingController;
+import com.abusyprogrammer.backend.algorithms.Hamming.HammingInput;
+import com.abusyprogrammer.backend.algorithms.Hamming.HammingService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.junit.Test;

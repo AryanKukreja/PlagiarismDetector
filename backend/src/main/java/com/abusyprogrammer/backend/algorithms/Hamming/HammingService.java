@@ -1,4 +1,4 @@
-package com.abusyprogrammer.backend.algorithms.hamming;
+package com.abusyprogrammer.backend.algorithms.Hamming;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
