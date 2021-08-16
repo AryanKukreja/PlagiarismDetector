@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.abusyprogrammer.backend.algorithms.levenshtein.LevenshteinController;
-import com.abusyprogrammer.backend.algorithms.levenshtein.LevenshteinInput;
-import com.abusyprogrammer.backend.algorithms.levenshtein.LevenshteinService;
+import com.abusyprogrammer.backend.algorithms.Levenshtein.LevenshteinController;
+import com.abusyprogrammer.backend.algorithms.Levenshtein.LevenshteinInput;
+import com.abusyprogrammer.backend.algorithms.Levenshtein.LevenshteinService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.junit.Test;
