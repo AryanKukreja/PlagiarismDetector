@@ -1,4 +1,4 @@
-package com.abusyprogrammer.backend.algorithms.Jaccard;
+package com.abusyprogrammer.backend.algorithms.JaccardIndex;
 
 // Imports
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -7,7 +7,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * JaccardService class has the Jaccard algorithm implementations for
+ * JaccardIndexService class has the JaccardIndex algorithm implementations for
  * the controller to work with
  * 
  * @author ___________
@@ -15,7 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @since _________
  */
 @JsonAutoDetect(fieldVisibility = Visibility.NON_PRIVATE)
-public class JaccardService {
+public class JaccardIndexService {
 	// The 2 text strings to compare
 	String text1, text2;
 	double score;
@@ -27,7 +27,7 @@ public class JaccardService {
 	 * @param text1 String #1 to compare
 	 * @param text2 String #2 to compare
 	 */
-	public JaccardService(String text1, String text2) {
+	public JaccardIndexService(String text1, String text2) {
 		this.text1 = text1;
 		this.text2 = text2;
 		this.differences = 0;

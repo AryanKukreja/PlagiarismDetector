@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.abusyprogrammer.backend.algorithms.Jaccard.JaccardController;
-import com.abusyprogrammer.backend.algorithms.Jaccard.JaccardInput;
-import com.abusyprogrammer.backend.algorithms.Jaccard.JaccardService;
+import com.abusyprogrammer.backend.algorithms.JaccardIndex.JaccardIndexController;
+import com.abusyprogrammer.backend.algorithms.JaccardIndex.JaccardIndexInput;
+import com.abusyprogrammer.backend.algorithms.JaccardIndex.JaccardIndexService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.junit.Test;
@@ -20,8 +20,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest({ JaccardController.class })
-public class JaccardServiceTests {
+@WebMvcTest({ JaccardIndexController.class })
+public class JaccardIndexServiceTests {
 
 	// Mock MVC variable set up
 	@Autowired
@@ -31,17 +31,17 @@ public class JaccardServiceTests {
 	private final String LONG_TEXT = "I am going to take a stroll in the park";
 
 	@Test
-	public void testJaccardInput() throws Exception {
+	public void testJaccardIndexInput() throws Exception {
 		// TODO Input tests here
 	}
 
 	@Test
-	public void testJaccardService() throws Exception {
+	public void testJaccardIndexService() throws Exception {
 		// TODO Service tests here
 	}
 
 	@Test
-	public void testJaccardController() throws Exception {
+	public void testJaccardIndexController() throws Exception {
 		// TODO MVC Controller tests here
 	}
 

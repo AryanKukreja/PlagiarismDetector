@@ -1,14 +1,14 @@
-package com.abusyprogrammer.backend.algorithms.Temp;
+package com.abusyprogrammer.backend.algorithms.JaccardIndex;
 
 /**
- * The TempInput class is used to structure the body of incoming requests
- * to the TempController.
+ * The JaccardIndexInput class is used to structure the body of incoming requests
+ * to the JaccardIndexController.
  * 
- * @author __________
- * @version 1.0.0
- * @since __________
+ * @author ______________
+ * @version ______________
+ * @since ______________
  */
-public class TempInput {
+public class JaccardIndexInput {
 
 	// The 2 string texts to be compared
 	private String text1, text2;
@@ -19,7 +19,7 @@ public class TempInput {
 	 * @param text1 String #1 to compare
 	 * @param text2 String #2 to compare
 	 */
-	public TempInput(String text1, String text2) {
+	public JaccardIndexInput(String text1, String text2) {
 		this.text1 = text1;
 		this.text2 = text2;
 	}

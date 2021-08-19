@@ -10,9 +10,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * TempService class has the Temp algorithm implementations for
  * the controller to work with
  * 
- * @author ___________
- * @version ________
- * @since _________
+ * @author __________
+ * @version 1.0.0
+ * @since __________
  */
 @JsonAutoDetect(fieldVisibility = Visibility.NON_PRIVATE)
 public class TempService {

@@ -1,14 +1,14 @@
-package com.abusyprogrammer.backend.algorithms.Jaccard;
+package com.abusyprogrammer.backend.algorithms.SorensenDiceCoefficient;
 
 /**
- * The JaccardInput class is used to structure the body of incoming requests
- * to the JaccardController.
+ * The SorensenDiceCoefficientInput class is used to structure the body of incoming requests
+ * to the SorensenDiceCoefficientController.
  * 
- * @author ______________
- * @version ______________
- * @since ______________
+ * @author Aryan Kukreja
+ * @version 1.0.0
+ * @since 2021-08-18
  */
-public class JaccardInput {
+public class SorensenDiceCoefficientInput {
 
 	// The 2 string texts to be compared
 	private String text1, text2;
@@ -19,7 +19,7 @@ public class JaccardInput {
 	 * @param text1 String #1 to compare
 	 * @param text2 String #2 to compare
 	 */
-	public JaccardInput(String text1, String text2) {
+	public SorensenDiceCoefficientInput(String text1, String text2) {
 		this.text1 = text1;
 		this.text2 = text2;
 	}

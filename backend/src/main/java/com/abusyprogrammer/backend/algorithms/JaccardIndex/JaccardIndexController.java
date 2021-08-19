@@ -1,4 +1,4 @@
-package com.abusyprogrammer.backend.algorithms.Jaccard;
+package com.abusyprogrammer.backend.algorithms.JaccardIndex;
 
 // Imports
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -9,16 +9,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * The JaccardController class accepts requests to the /api/hamming endpoint
- * and forwards processing to JaccardService
+ * The JaccardIndexController class accepts requests to the /api/hamming endpoint
+ * and forwards processing to JaccardIndexService
  * 
- * @author ______________
- * @version ______________
+ * @author Aryan Kukreja
+ * @version 1.0.0
  * @since ______________
  */
 @RestController
-@RequestMapping(path = "api/jaccard/")
-public class JaccardController {
+@RequestMapping(path = "api/jaccardIndex/")
+public class JaccardIndexController {
 
 	/**
 	 * Parses the incoming POST body, performs the comparison between the 2 passed
@@ -29,8 +29,8 @@ public class JaccardController {
 	 * @throws JsonProcessingException Error in parsing the results into JSON format
 	 */
 	@PostMapping(consumes = "application/json", produces = "application/json")
-	public String compare(@RequestBody JaccardInput input) throws JsonProcessingException {
-		JaccardService service = new JaccardService(input.getText1(), input.getText2());
+	public String compare(@RequestBody JaccardIndexInput input) throws JsonProcessingException {
+		JaccardIndexService service = new JaccardIndexService(input.getText1(), input.getText2());
 
 		int result = service.computation();
 		return result == -1 ? "{\"error\": \"Cannot run processing with blank strings.\"}" : service.jsonify();
