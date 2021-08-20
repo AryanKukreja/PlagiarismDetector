@@ -100,6 +100,11 @@ create_file () {
 	# Replace all instances of "Temp" with the algorithm name
 	sed -i "s/api\/Temp/api\/$temp/g" $new_file
 	sed -i "s/Temp/${algorithm}/g" $new_file
+
+	# Set the @since
+	year=$(date +'%F')
+	sed -i "s/@since __________/@since $(date +'%F')/g" $new_file
+
 	echo -e "\e[34m> Content of new file \"$new_file\" updated"
 }
 
@@ -110,7 +115,7 @@ create_test () {
 
 	# Copy the template file into the new directory
 	cp "./new-algorithm-templates/TempServiceTests.txt" $new_test_file
-	echo -e "\e[34m> Test file \"$new_file\" cpdated"
+	echo -e "\e[34m> Test file \"$new_file\" updated"
 
 	# Replace all instances of "Temp" with the algorithm name
 	sed -i "s/Temp/${algorithm}/g" $new_test_file

@@ -1,4 +1,4 @@
-package com.abusyprogrammer.backend.algorithms.Temp;
+package com.abusyprogrammer.backend.algorithms.SorensenDiceCoefficient;
 
 // Imports
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -9,16 +9,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * The TempController class accepts requests to the /api/hamming endpoint
- * and forwards processing to TempService
+ * The SorensenDiceCoefficientController class accepts requests to the /api/hamming endpoint
+ * and forwards processing to SorensenDiceCoefficientService
  * 
- * @author __________
+ * @author Aryan Kukreja
  * @version 1.0.0
- * @since __________
+ * @since 2021-08-18
  */
 @RestController
-@RequestMapping(path = "api/Temp/")
-public class TempController {
+@RequestMapping(path = "api/sorensen-dice-coefficient/")
+public class SorensenDiceCoefficientController {
 
 	/**
 	 * Parses the incoming POST body, performs the comparison between the 2 passed
@@ -29,8 +29,8 @@ public class TempController {
 	 * @throws JsonProcessingException Error in parsing the results into JSON format
 	 */
 	@PostMapping(consumes = "application/json", produces = "application/json")
-	public String compare(@RequestBody TempInput input) throws JsonProcessingException {
-		TempService service = new TempService(input.getText1(), input.getText2());
+	public String compare(@RequestBody SorensenDiceCoefficientInput input) throws JsonProcessingException {
+		SorensenDiceCoefficientService service = new SorensenDiceCoefficientService(input.getText1(), input.getText2());
 
 		int result = service.computation();
 		return result == -1 ? "{\"error\": \"Cannot run processing with blank strings.\"}" : service.jsonify();
