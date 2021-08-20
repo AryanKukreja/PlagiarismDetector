@@ -60,13 +60,19 @@ public class TempService {
 		return mapper.writeValueAsString(this);
 	}
 
+	/**
+	 * Return the difference count between the 2 strings
+	 * 
+	 * @return differences attribute
+	 */
 	public int getDifferences() {
 		return this.differences;
 	}
 
 	/**
 	 * Calculates the similarity score
-	 * @return
+
+	 * @return score
 	 */
 	public double getScore() {
 		return this.score;

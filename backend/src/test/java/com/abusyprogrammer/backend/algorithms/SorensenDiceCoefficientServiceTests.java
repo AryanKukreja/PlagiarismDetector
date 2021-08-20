@@ -68,6 +68,13 @@ public class SorensenDiceCoefficientServiceTests {
 				.andExpect(status().isOk()).andExpect(MockMvcResultMatchers.jsonPath("$.text1").value(TEXT_1))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.text2").value(TEXT_2))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.score").value(0.4));
+
+		mvc.perform(
+				MockMvcRequestBuilders.post("/api/sorensen-dice-coefficient/").content(asJsonString(new SorensenDiceCoefficientInput("AA", "AAAAAA")))
+						.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk()).andExpect(MockMvcResultMatchers.jsonPath("$.text1").value("AA"))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.text2").value("AAAAAA"))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.score").value((double) 1 / (double) 3));
 	}
 
 	public static String asJsonString(final Object obj) {

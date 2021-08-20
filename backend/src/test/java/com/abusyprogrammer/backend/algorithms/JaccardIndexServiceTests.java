@@ -27,22 +27,54 @@ public class JaccardIndexServiceTests {
 	@Autowired
 	private MockMvc mvc;
 
-	private final String SHORT_TEXT = "I am taking a walk";
-	private final String LONG_TEXT = "I am going to take a stroll in the park";
+	private final String TEXT_1 = "I am taking a walk";
+	private final String TEXT_2 = "I am going to take a stroll in the park";
 
 	@Test
 	public void testJaccardIndexInput() throws Exception {
-		// TODO Input tests here
+		JaccardIndexInput input = new JaccardIndexInput(TEXT_1, TEXT_2);
+		assertEquals(TEXT_1, input.getText1());
+		assertEquals(TEXT_2, input.getText2());
 	}
 
 	@Test
 	public void testJaccardIndexService() throws Exception {
-		// TODO Service tests here
+		JaccardIndexService service = new JaccardIndexService(TEXT_1, TEXT_2);
+		assertEquals(0.0, service.getScore());
+		assertEquals(TEXT_1, service.getText1());
+		assertEquals(TEXT_2, service.getText2());
 	}
 
 	@Test
 	public void testJaccardIndexController() throws Exception {
-		// TODO MVC Controller tests here
+		mvc.perform(MockMvcRequestBuilders.post("/api/jaccard-index/")
+				.content(asJsonString(new JaccardIndexInput("", ""))).contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk())
+				.andExpect(MockMvcResultMatchers.jsonPath("$.error").value("Cannot run processing with blank strings."));
+
+		mvc.perform(MockMvcRequestBuilders.post("/api/jaccard-index/")
+				.content(asJsonString(new JaccardIndexInput(TEXT_1, ""))).contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk())
+				.andExpect(MockMvcResultMatchers.jsonPath("$.error").value("Cannot run processing with blank strings."));
+
+		mvc.perform(MockMvcRequestBuilders.post("/api/jaccard-index/")
+				.content(asJsonString(new JaccardIndexInput("", TEXT_2))).contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk())
+				.andExpect(MockMvcResultMatchers.jsonPath("$.error").value("Cannot run processing with blank strings."));
+
+		mvc.perform(
+				MockMvcRequestBuilders.post("/api/jaccard-index/").content(asJsonString(new JaccardIndexInput(TEXT_1, TEXT_2)))
+						.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk()).andExpect(MockMvcResultMatchers.jsonPath("$.text1").value(TEXT_1))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.text2").value(TEXT_2))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.score").value(0.25));
+
+		mvc.perform(
+				MockMvcRequestBuilders.post("/api/jaccard-index/").content(asJsonString(new JaccardIndexInput("AA", "AAAAAA")))
+						.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk()).andExpect(MockMvcResultMatchers.jsonPath("$.text1").value("AA"))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.text2").value("AAAAAA"))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.score").value((double) 1 / (double) 5));
 	}
 
 	public static String asJsonString(final Object obj) {

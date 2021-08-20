@@ -1,5 +1,8 @@
 package com.abusyprogrammer.backend.algorithms.JaccardIndex;
 
+import java.util.HashMap;
+import java.util.HashSet;
+
 // Imports
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
@@ -10,16 +13,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * JaccardIndexService class has the JaccardIndex algorithm implementations for
  * the controller to work with
  * 
- * @author ___________
- * @version ________
- * @since _________
+ * @author Aryan Kukreja
+ * @version 1.0.0
+ * @since 2021-08-19
  */
 @JsonAutoDetect(fieldVisibility = Visibility.NON_PRIVATE)
 public class JaccardIndexService {
 	// The 2 text strings to compare
 	String text1, text2;
 	double score;
-	int differences;
 
 	/**
 	 * This constructor is used for initializing the input with the 2 strings to
@@ -30,12 +32,48 @@ public class JaccardIndexService {
 	public JaccardIndexService(String text1, String text2) {
 		this.text1 = text1;
 		this.text2 = text2;
-		this.differences = 0;
 		this.score = 0.0;
 	}
 
 	/**
-	 * The main computation function where the algorithm is implemented.
+	 * Generates a HashMap of bigrams based on the provided text
+	 * 
+	 * @param text Input text to convert to bigrams
+	 * @return The HashMap of bigrams tracked (HashMap is used to track duplicates)
+	 */
+	public HashMap<String, Integer> getBigrams(String text) {
+		HashMap<String, Integer> bigrams = new HashMap<String, Integer>();
+
+		for (int i = 0; i < text.length() - 1; i++) {
+			String bigram = "" + text.charAt(i) + text.charAt(i + 1);
+			if (bigrams.containsKey(bigram)) {
+				bigrams.put(bigram, bigrams.get(bigram) + 1);
+			}
+			else {
+				bigrams.put(bigram, 1);
+			}
+		}
+
+		return bigrams;
+	}
+
+	/**
+	 * Returns a count of all the bigrams in the sentence, including duplicates.
+	 * 
+	 * @param textBigram The bigram to record
+	 * @return The number of bigrams
+	 */
+	public int getDuplicateBigramCount(HashMap<String, Integer> textBigram) {
+		int total = 0;
+		for (String key : textBigram.keySet()) {
+			total += textBigram.get(key);
+		}
+
+		return total;
+	}
+
+	/**
+	 * The main computation function where the algorithm is implemented. It 
 	 * 
 	 * @return Status of function completion (success or failure)
 	 */
@@ -44,7 +82,24 @@ public class JaccardIndexService {
 			return -1;
 		}
 		
-		// TODO Algorithm to implement
+		// Get the bigrams
+		HashMap<String, Integer> text1Bigrams = this.getBigrams(this.text1);
+		HashMap<String, Integer> text2Bigrams = this.getBigrams(this.text2);
+
+		// Get the intersection of them
+		HashSet<String> intersection = new HashSet<>();
+		for (String key : text1Bigrams.keySet()) {
+			if (text2Bigrams.containsKey(key)) {
+				intersection.add(key);
+			}
+		}
+
+		// Get the count of bigrams in both texts (including duplicates)
+		int text1BigramCount = this.getDuplicateBigramCount(text1Bigrams);
+		int text2BigramCount = this.getDuplicateBigramCount(text2Bigrams);
+
+		// Get the similarity score
+		this.score = (intersection.size()) / (double) (text1BigramCount + text2BigramCount - intersection.size());
 
 		return 0;
 	}
@@ -60,13 +115,10 @@ public class JaccardIndexService {
 		return mapper.writeValueAsString(this);
 	}
 
-	public int getDifferences() {
-		return this.differences;
-	}
-
 	/**
 	 * Calculates the similarity score
-	 * @return
+	 * 
+	 * @return The score
 	 */
 	public double getScore() {
 		return this.score;

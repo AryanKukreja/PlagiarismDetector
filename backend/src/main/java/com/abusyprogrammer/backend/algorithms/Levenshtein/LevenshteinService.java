@@ -102,12 +102,18 @@ public class LevenshteinService {
 		return mapper.writeValueAsString(this);
 	}
 
+	/**
+	 * Return the difference count between the 2 strings
+	 * 
+	 * @return differences attribute
+	 */
 	public int getDifferences() {
 		return this.differences;
 	}
 
 	/**
 	 * Calculates the similarity score
+	 * 
 	 * @return Score
 	 */
 	public double getScore() {

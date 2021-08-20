@@ -22,7 +22,6 @@ public class SorensenDiceCoefficientService {
 	// The 2 text strings to compare
 	String text1, text2;
 	double score;
-	int differences;
 
 	/**
 	 * This constructor is used for initializing the input with the 2 strings to
@@ -77,7 +76,6 @@ public class SorensenDiceCoefficientService {
 	 * The main computation function where the algorithm is implemented. It 
 	 * 
 	 * @return Status of function completion (success or failure)
-	 * ['AA'], ['AA', 'AA', 'AA', 'AA'] => {'AA'}, {'AA'} => {'AA'} => 2 / 
 	 */
 	public int computation() {
 		if (this.text1.equals("") || this.text2.equals("")) {
@@ -119,7 +117,8 @@ public class SorensenDiceCoefficientService {
 
 	/**
 	 * Calculates the similarity score
-	 * @return
+	 * 
+	 * @return score
 	 */
 	public double getScore() {
 		return this.score;

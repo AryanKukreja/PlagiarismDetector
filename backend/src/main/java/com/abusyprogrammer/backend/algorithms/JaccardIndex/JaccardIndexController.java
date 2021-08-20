@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
  * 
  * @author Aryan Kukreja
  * @version 1.0.0
- * @since ______________
+ * @since 2021-08-19
  */
 @RestController
-@RequestMapping(path = "api/jaccardIndex/")
+@RequestMapping(path = "api/jaccard-index/")
 public class JaccardIndexController {
 
 	/**

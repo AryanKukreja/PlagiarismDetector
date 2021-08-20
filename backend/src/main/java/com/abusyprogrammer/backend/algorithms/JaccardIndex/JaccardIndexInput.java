@@ -4,9 +4,9 @@ package com.abusyprogrammer.backend.algorithms.JaccardIndex;
  * The JaccardIndexInput class is used to structure the body of incoming requests
  * to the JaccardIndexController.
  * 
- * @author ______________
- * @version ______________
- * @since ______________
+ * @author Aryan Kukreja
+ * @version 1.0.0
+ * @since 2021-08-19
  */
 public class JaccardIndexInput {
 
