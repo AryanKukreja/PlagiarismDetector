@@ -15,7 +15,6 @@ main () {
 
 	# Installations
 	java_setup
-	maven_install
 	tomcat_setup
 
 	# Post-processing
@@ -55,45 +54,19 @@ java_setup () {
 
 	if [[ -z "${JAVA_HOME}" ]]
 	then
-		echo -e "\e[31m> Error: Unable to set \$JAVA_HOME. Please attempt to set JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/";
-		exit -1
-	else
 		echo -e "\e[34m> \$JAVA_HOME has been set"
-	fi
-}
-
-maven_install () {
-	# Update package information
-	apt update
-
-	# Install Maven
-	apt install maven
-
-	# Check if maven was successfully installed
-	if ! type "mvn --version" > /dev/null
-	then
-		echo -e "\e[31m> Error: Maven installation failed. Try to run installation for \"sudo apt install maven\" again";
-		exit -1
 	else
-		echo -e "\e[34m> Maven is installed"
+		echo -e "\e[31m> Error: Unable to set \$JAVA_HOME. Please attempt to set JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/";
+		exit -1;
 	fi
 }
 
 tomcat_setup () {
-	# Update package information
-	apt update
-
 	# Install wget
 	apt install wget
 
 	# Check if maven was successfully installed
-	if ! type "wget --version" > /dev/null
-	then
-		echo -e "\e[31m> Error: wget installation failed. Try to run installation for \"sudo apt install wget\" again";
-		exit -1
-	else
-		echo -e "\e[34m> wget is installed"
-	fi
+	command_exists "wget";
 
 	# Get Tomcat V9
 	## First clone from remote Tomcat server
@@ -114,7 +87,7 @@ tomcat_setup () {
 		echo -e "\e[31m> Error: unable to extract Tomcat 9.0. Manually attempt to extract.";
 		exit -1
 	else
-		echo -e "\e[34m>> 1. Tomcat 9.0 extracted and saved to \"/usr/lib/apache-tomcat-9.0.52\"."
+		echo -e "\e[34m>> 2. Tomcat 9.0 extracted and saved to \"/usr/lib/apache-tomcat-9.0.52\"."
 	fi
 }
 
@@ -135,6 +108,20 @@ post_process () {
 	fi
 
 	echo -e "\e[32m> Success! Your project is ready to run.";
+}
+
+# Utility function to check if program exists
+# Source: https://raymii.org/s/snippets/Bash_Bits_Check_if_command_is_available.html
+command_exists() {
+    # check if command exists and fail otherwise
+    command -v "$1" >/dev/null 2>&1
+    if [[ $? -ne 0 ]]
+		then
+        echo -e "e[31m> Error: Installation for $1 failed. Attempt to install manually."
+        exit -1
+		else
+			exists=0
+    fi
 }
 
 main
