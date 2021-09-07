@@ -81,6 +81,7 @@ tomcat_setup () {
 	fi
 
 	# Then extract to correct location
+	mkdir /usr/lib/apache-tomcat-9.0.52
 	tar_output=$(tar -xvzf /tmp/apache-tomcat-9.0.52.tar.gz -C /usr/lib/apache-tomcat-9.0.52)
 	if [ $? -ne 0 ]
 	then
