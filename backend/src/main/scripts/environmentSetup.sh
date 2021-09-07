@@ -1,8 +1,8 @@
 #!/bin/bash
 
 ################################################################
-# Generate a New Algorithm
-# - Used to generate a Java package, its code files, and test files for a new algorithm to implement
+# Setup Environment
+# - Installs the necessary programs and packages to run an instance of the Spring-Boot project.
 
 # Aryan Kukreja
 # Plagiarism Detector Project
@@ -21,6 +21,7 @@ main () {
 	post_process
 }
 
+# Prior checks to running main functions
 pre_setup () {
 	# Check if script is running with elevated privileges
 	if [[ $EUID -eq 0 ]]
@@ -32,6 +33,7 @@ pre_setup () {
 	fi
 }
 
+# Install Java and set up environment variables
 java_setup () {
 	# Update package information
 	apt update
@@ -61,6 +63,7 @@ java_setup () {
 	fi
 }
 
+# Clone Tomcat V9.0 from remote and set up locally
 tomcat_setup () {
 	# Install wget
 	apt install wget
@@ -92,6 +95,7 @@ tomcat_setup () {
 	fi
 }
 
+# Clean up unrequired directories and files
 post_process () {
 	# Remove the temp Tomcat 9 tar.gz file
 	rm -rf /tmp/apache-tomcat-9.0.52
