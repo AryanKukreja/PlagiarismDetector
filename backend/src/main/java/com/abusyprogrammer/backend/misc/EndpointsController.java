@@ -36,6 +36,18 @@ public class EndpointsController {
                 put("path", "api/levenshtein/");
             }
         }));
+        this.endpoints.put("Jaccard", new JSONObject(new HashMap<String, String>() {
+            {
+                put("name", "Jaccard Distance");
+                put("path", "api/jaccard-distance/");
+            }
+        }));
+        this.endpoints.put("SorensenDice", new JSONObject(new HashMap<String, String>() {
+            {
+                put("name", "Sorensen-Dice Coefficient");
+                put("path", "api/sorensen-dice-coefficient/");
+            }
+        }));
     }
 
     /**

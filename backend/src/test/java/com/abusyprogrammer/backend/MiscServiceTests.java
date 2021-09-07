@@ -54,6 +54,16 @@ public class MiscServiceTests {
 				.andExpect(status().isOk()).andExpect(MockMvcResultMatchers.jsonPath("$.Levenshtein").exists())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.Levenshtein.name").value("Levenshtein Distance"))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.Levenshtein.path").value("api/levenshtein/"));
+
+		mvc.perform(MockMvcRequestBuilders.get("/api/misc/endpoints/", 1).accept(MediaType.APPLICATION_JSON)).andDo(print())
+				.andExpect(status().isOk()).andExpect(MockMvcResultMatchers.jsonPath("$.Jaccard").exists())
+				.andExpect(MockMvcResultMatchers.jsonPath("$.Jaccard.name").value("Jaccard Distance"))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.Jaccard.path").value("api/jaccard-distance/"));
+
+		mvc.perform(MockMvcRequestBuilders.get("/api/misc/endpoints/", 1).accept(MediaType.APPLICATION_JSON)).andDo(print())
+				.andExpect(status().isOk()).andExpect(MockMvcResultMatchers.jsonPath("$.SorensenDice").exists())
+				.andExpect(MockMvcResultMatchers.jsonPath("$.Levenshtein.name").value("Sorensen-Dice Coefficient"))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.Levenshtein.path").value("api/levenshtein/"));
 	}
 
 }
